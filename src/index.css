@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    color: white;
+}
+
+/* primary - #1F1E24
+SECONDARY - #6556CD */
+.link:hover p{
+    color: black;
+}
+::-webkit-scrollbar{
+    width: 7px;
+    height: 2px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #6958d6 ;
+    border-radius: 50px;
+}
