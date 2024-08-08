@@ -10,6 +10,7 @@
 SECONDARY - #6556CD */
 .link:hover p{
     color: black;
+    
 }
 ::-webkit-scrollbar{
     width: 7px;
@@ -19,3 +20,4 @@ SECONDARY - #6556CD */
     background-color: #6958d6 ;
     border-radius: 50px;
 }
+
