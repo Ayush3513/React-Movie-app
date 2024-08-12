@@ -15,6 +15,7 @@ SECONDARY - #6556CD */
 ::-webkit-scrollbar{
     width: 7px;
     height: 2px;
+    display: none;
 }
 ::-webkit-scrollbar-thumb{
     background-color: #6958d6 ;
