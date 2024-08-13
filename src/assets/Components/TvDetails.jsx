@@ -60,7 +60,7 @@ useEffect(() => {
 
         </div>
         </div>
-        <div className="flex flex-col gap-5 mt-5">
+        <div className="flex flex-col gap-5 mt-10">
           {info.watchproviders && info.watchproviders.flatrate && <div className='flex items-center gap-5'>
             <h1>Available on platform</h1>
             {info.watchproviders.flatrate.map(i => 

@@ -8,6 +8,7 @@ import Tcards from './Tcards';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Popular = () => {
+    document.title = "Popular"
     const [category, setCategory] = useState("movie");
     const [pCards, setPCards] = useState([]);
     const [page, setPage] = useState(1); // For pagination

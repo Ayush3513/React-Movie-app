@@ -8,6 +8,7 @@ import Tcards from './Tcards';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Tvshows = () => {
+    document.title = "TV Shows"
     const [cards, setCards] = useState([]);
     const [page, setPage] = useState(1); // For pagination
     const [hasMore, setHasMore] = useState(false);

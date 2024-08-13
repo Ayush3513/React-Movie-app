@@ -8,6 +8,7 @@ import Tcards from '../Components/Tcards';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Trending = () => {
+    document.title = "Trending"
     const [category, setCategory] = useState("all");
     const [duration, setDuration] = useState("day");
     const [cards, setCards] = useState([]);

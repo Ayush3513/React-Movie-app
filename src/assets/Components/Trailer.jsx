@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Notfound from "./Notfound"
 
 const Trailer = () => {
+  document.title = "Trailer"
   const navigate = useNavigate();
 
   const { pathname } = useLocation();

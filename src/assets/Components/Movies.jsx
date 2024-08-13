@@ -7,7 +7,10 @@ import axios from '../../Utils/Axios';
 import Tcards from './Tcards';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
 const Movies = () => {
+    document.title = "Movies"
+
     const [cards, setCards] = useState([]);
     const [page, setPage] = useState(1); // For pagination
     const [hasMore, setHasMore] = useState(false);

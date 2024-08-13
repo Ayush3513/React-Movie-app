@@ -40,7 +40,7 @@ const MovieDetails = () => {
         <div className="ml-16 relative">
           <h1 className=' font-black text-7xl'>{info.detail.original_name || info.detail.name || info.detail.original_title || info.detail.title}<span className='text-2xl font-semibold text-zinc-300'>({info.detail.release_date.split("-")[0]})</span></h1>
           
-          <div className="flex gap-5 my-5 text-xl text-zinc-300">
+          <div className="flex w-[60vw] gap-5 my-5 text-xl text-zinc-300">
             <h1 className=''>{info.detail.release_date}</h1>
             <h1>{info.detail.genres.map(e => e.name).join(" ,")}</h1>
             <h1>{info.detail.runtime}min</h1>
@@ -56,7 +56,7 @@ const MovieDetails = () => {
 
         </div>
         </div>
-        <div className="flex flex-col gap-5 mt-5">
+        <div className="flex flex-col  gap-5 mt-10">
           {info.watchproviders && info.watchproviders.flatrate && <div className='flex items-center gap-5'>
             <h1>Available on platform</h1>
             {info.watchproviders.flatrate.map(i => 
