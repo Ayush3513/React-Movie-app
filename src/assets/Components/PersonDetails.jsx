@@ -40,8 +40,8 @@ console.log(info)
             <div className="first pl-[10%]">
             <img className='h-[40vh]  shadow-[10px_20px_40px_5px_rgb(0,0,0)] object-cover' src={`https://image.tmdb.org/t/p/original/${info.detail.profile_path}`} alt="" />
             <div className="flex text-2xl mt-5 gap-10"><a href={info.detail.homepage}><i className="ri-facebook-circle-fill"></i></a>
-        <a href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
-        <a href={`https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}><i className="ri-instagram-fill"></i></a></div>
+        <a target='_blank'  href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
+        <a target='_blank'  href={`https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}><i className="ri-instagram-fill"></i></a></div>
         <hr  className='my-5'/>
         <h1 className='text-3xl font-bold'>Personal Info</h1>
 

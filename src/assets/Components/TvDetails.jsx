@@ -34,8 +34,8 @@ useEffect(() => {
       <nav className='h-[15vh] w-full px-16 py-5 flex items-center justify-between gap-10 text-2xl'>
         <div className=""><Link><i onClick={() => navigate(-1)} className="ri-arrow-left-line "></i></Link></div>
         <div className="flex gap-10"><a href={info.detail.homepage}><i className="ri-external-link-fill"></i></a>
-        <a href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
-        <a href={info.extarnalids.imdb_id && `https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}>IMDb</a></div>
+        <a target='_blank'  href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
+        <a target='_blank'  href={info.extarnalids.imdb_id && `https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}>IMDb</a></div>
       </nav>
 
       <div className="h-fit  w-full px-[8%]">
