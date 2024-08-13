@@ -10,11 +10,7 @@ function Dropdown({ options, func, title1 }) {
     setTitle(val);
   };
 
-  useEffect(() => {
-    if (isOpen && buttonRef.current) {
-      buttonRef.current.focus(); // Set focus on the button when dropdown is opened
-    }
-  }, [isOpen]);
+ 
 
   return (
     <div className="relative inline-block text-left">

@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-
 import { loadmovies, removemovie } from '../store/actions/movieaction';
 import Loading from './Loading';
 import Cards from '../Partials/Cards';
-import Trailer from './Trailer';
+
 
 const MovieDetails = () => {
 
@@ -14,6 +14,7 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
 
   const {info} = useSelector(state => state.movie)
+  
   useEffect(() => {
     dispatch(loadmovies(id));
 
@@ -28,9 +29,9 @@ const MovieDetails = () => {
     <div style={{ background: `linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.8),rgba(0, 0, 0, .9)) ,url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path })`, backgroundSize:"cover" ,backgroundPosition:"top"}} className='h-screen relative w-full overflow-auto p-5'>
       <nav className='h-[15vh] w-full px-16 py-5 flex items-center justify-between gap-10 text-2xl'>
         <div className=""><Link><i onClick={() => navigate(-1)} className="ri-arrow-left-line "></i></Link></div>
-        <div className="flex gap-10"><a href={info.detail.homepage}><i class="ri-external-link-fill"></i></a>
-        <a href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i class="ri-earth-fill"></i></a>
-        <a href={`https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}>imdb</a></div>
+        <div className="flex gap-10"><a href={info.detail.homepage}><i className="ri-external-link-fill"></i></a>
+        <a href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
+        <a href={`https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}>IMDb</a></div>
       </nav>
 
       <div className="h-fit  w-full px-[8%]">
@@ -51,7 +52,7 @@ const MovieDetails = () => {
           <div className="text-5xl mt-5 mb-3 font-semibold">Languages</div>
           <p>{info.detail.spoken_languages.map(e => e.english_name).join(" , ")}</p>
 
-            <Link to={`${pathname}/trailer`} className='py-3 px-6 font-semibold bg-[#6556CD] absolute right-0 bottom-0 flex items-center gap-3 rounded-lg text-2xl'><i class="ri-play-fill"></i><h1>Trailer</h1></Link>
+            <Link to={`${pathname}/trailer`} className='py-3 px-6 font-semibold bg-[#6556CD] absolute right-0 bottom-0 flex items-center gap-3 rounded-lg text-2xl'><i className="ri-play-fill"></i><h1>Trailer</h1></Link>
 
         </div>
         </div>
