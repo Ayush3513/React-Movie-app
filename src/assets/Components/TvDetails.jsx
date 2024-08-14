@@ -25,7 +25,7 @@ useEffect(() => {
   }, [dispatch, id]);
 
   const {info} = useSelector(state => state.tv)
-  console.log(info)
+  
    // Added 'id' to the dependency array
 
   return info ? (
@@ -33,7 +33,7 @@ useEffect(() => {
     <div style={{ background: `linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.8),rgba(0, 0, 0, .9)) ,url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path })`, backgroundSize:"cover" ,backgroundPosition:"top"}} className='h-screen relative w-full overflow-auto p-5'>
       <nav className='h-[15vh] w-full px-16 py-5 flex items-center justify-between gap-10 text-2xl'>
         <div className=""><Link><i onClick={() => navigate(-1)} className="ri-arrow-left-line "></i></Link></div>
-        <div className="flex gap-10"><a href={info.detail.homepage}><i className="ri-external-link-fill"></i></a>
+        <div className="flex gap-10"><a target='_blank' href={info.detail.homepage ? info.detail.homepage : null}><i className="ri-external-link-fill"></i></a>
         <a target='_blank'  href={`https://www.wikidata.org/wiki/${info.extarnalids.wikidata_id}`}><i className="ri-earth-fill"></i></a>
         <a target='_blank'  href={info.extarnalids.imdb_id && `https://www.imdb.com/title/${info.extarnalids.imdb_id}/`}>IMDb</a></div>
       </nav>
@@ -92,9 +92,10 @@ useEffect(() => {
         <div className='h-fit  flex items-center justify-start gap-10 p-6 overflow-auto  '>
         
            {info.detail.seasons.map((e,i)=>{
-            return <Link to={`/tv/details/${e.id}`} key={i}  className="h-[40vh]  w-[14vw] mb-5 flex-shrink-0  relative">
+            console.log(e)
+            return <Link to={`/tv/details/${id}`} key={i}   className="h-[40vh]  w-[14vw] mb-5 flex-shrink-0  relative">
             <img className='h-[90%] w-screen shadow-[10px_20px_40px_5px_rgb(0,0,0)] object-cover' src={e.poster_path ? `https://image.tmdb.org/t/p/original/${ e.poster_path}` : "https://cdn.vectorstock.com/i/500p/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"} alt="" />
-            <h1 className='mt-3 text-xl'>Season {e.season_number + 1}</h1>
+            <h1 className='mt-3 text-xl'>{e.name}</h1>
        </Link>
            })}
            
@@ -103,7 +104,7 @@ useEffect(() => {
         <div className="">
           <h1 className='text-3xl font-bold  my-5 pl-5'>Recommendation</h1>
 
-          {info.recommendations ? <Cards data={info.recommendations > 0? info.recommendations : info.similar} /> : <h1 className='text-3xl text-center mt-20'>Nothing to show</h1>}
+          { <Cards data={info.recommendations} title={"tv"} /> }
           
           
         </div>

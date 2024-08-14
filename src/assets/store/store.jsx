@@ -9,5 +9,6 @@ export const store = configureStore({
     movie:movieReducer,
     tv:tvReducer,
     person:personReducer,
+    
   },
 })
