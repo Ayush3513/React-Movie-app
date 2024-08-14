@@ -93,7 +93,7 @@ useEffect(() => {
         
            {info.detail.seasons.map((e,i)=>{
             console.log(e)
-            return <Link to={`/tv/details/${id}`} key={i}   className="h-[40vh]  w-[14vw] mb-5 flex-shrink-0  relative">
+            return <Link to={`/tv/details/${id}`} key={i}   className="h-[40vh]   mb-5 flex-shrink-0  relative">
             <img className='h-[90%] w-screen shadow-[10px_20px_40px_5px_rgb(0,0,0)] object-cover' src={e.poster_path ? `https://image.tmdb.org/t/p/original/${ e.poster_path}` : "https://cdn.vectorstock.com/i/500p/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"} alt="" />
             <h1 className='mt-3 text-xl'>{e.name}</h1>
        </Link>
