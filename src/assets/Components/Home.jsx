@@ -41,7 +41,7 @@ const [category, setcategory] = useState("all");
 
 
   return header && cards ? (
-    <div className='overflow-x-hidden overflow-y-auto'>
+    <div className='h-screen w-screen flex overflow-x-hidden overflow-y-auto'>
     <Sidenav />
     <div className=" h-full w-[80%] overflow-y-auto overflow-x-hidden  ">
       <Topnav />
