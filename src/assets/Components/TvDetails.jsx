@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading';
 import Cards from '../Partials/Cards';
-import Trailer from './Trailer';
 import { loadtv, removetv } from '../store/reducer/tvSlice';
 import { loadtvs } from '../store/actions/tvaction';
 
