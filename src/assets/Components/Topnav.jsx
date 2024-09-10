@@ -2,8 +2,9 @@ import axios from '../../Utils/Axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { debounce } from 'lodash';
+import Checkbox from './Checkbox';
 
-const Topnav = () => {
+const Topnav = ({navOpenHandler}) => {
   const [query, setQuery] = useState("");
   const [searches, setSearches] = useState([]);
 
@@ -35,7 +36,7 @@ const Topnav = () => {
         <input 
           value={query} 
           onChange={(e) => setQuery(e.target.value)} 
-          className='w-full rounded-full pl-10 pr-10 py-2 sm:py-3 outline-none border-none bg-[#6656cd5b] text-white placeholder-gray-300' 
+          className='w-full rounded-full pl-10 md:w-[90%] pr-10 py-2 sm:py-3 outline-none border-none bg-[#6656cd5b] text-white placeholder-gray-300' 
           placeholder='Search movies, TV shows, and people' 
           type="text" 
         />
@@ -48,6 +49,9 @@ const Topnav = () => {
           </button>
         )}
       </div>
+     <button className='w-10 h-10' onClick={navOpenHandler}>
+     <Checkbox />
+     </button>
       
       {searches.length > 0 && (
         <div className='absolute max-h-[60vh] w-full max-w-3xl z-20 rounded-md top-full left-1/2 transform -translate-x-1/2 bg-zinc-800 overflow-auto mt-2 shadow-lg'>

@@ -13,7 +13,7 @@ const Home = () => {
   const [header, setheader] = useState(null);
   const [cards, setcards] = useState(null);
   const [category, setcategory] = useState("all");
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   const getHeader = async () => {
     try {
@@ -25,16 +25,20 @@ const Home = () => {
     }
   }
 
+  const navOpenHandler = ()=>{
+    setIsMobile(window.innerWidth <= 768)
+  }
+
   useEffect(() => {
     !header && getHeader()
     getCard()
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile();
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', navOpenHandler);
+    return () => window.removeEventListener('resize', navOpenHandler);
   }, [category])
 
   const getCard = async () => {
@@ -47,10 +51,11 @@ const Home = () => {
   }
 
   return header && cards ? (
-    <div className='flex flex-col md:flex-row min-h-screen w-full overflow-x-hidden'>
-      {!isMobile && <Sidenav />}
-      <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
-        <Topnav />
+    
+    <div className='flex flex-row min-h-screen w-full '>
+      {!isMobile && <Sidenav isMobile={isMobile} />}
+      <div className="flex-1 flex flex-col overflow-y-auto ">
+        <Topnav navOpenHandler={navOpenHandler} />
         <Header data={header} />
 
         <div className="p-4 pb-0 flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -61,8 +66,8 @@ const Home = () => {
         <Cards data={cards} title={category} />
         
         {isMobile && (
-          <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-800 p-4">
-            {/* Add your mobile navigation items here */}
+          <nav className="md:hidden h-screen/4 fixed top-0 left-0 right-0 bg-[#1F1F1F] p-4">
+            {<Sidenav />}
           </nav>
         )}
       </div>
