@@ -13,7 +13,7 @@ const Home = () => {
   const [header, setheader] = useState(null);
   const [cards, setcards] = useState(null);
   const [category, setcategory] = useState("all");
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768 ? true : false);
 
   const getHeader = async () => {
     try {
@@ -26,7 +26,7 @@ const Home = () => {
   }
 
   const navOpenHandler = ()=>{
-    setIsMobile(window.innerWidth <= 768)
+    setIsMobile(window.innerWidth <= 768 ? true :)
   }
 
   useEffect(() => {
@@ -50,10 +50,19 @@ const Home = () => {
     }
   }
 
+  const toggelHandler = () => setIsMobile(!isMobile)
+
   return header && cards ? (
     
-    <div className='flex flex-row min-h-screen w-full '>
-      {!isMobile && <Sidenav isMobile={isMobile} />}
+    
+    <div className='flex flex-row min-h-screen w-full relative '>
+       {isMobile && (<label  className="flex flex-col gap-2 w-8 absolute top-5 right-5">
+      <input onClick={toggelHandler} className="peer hidden" type="checkbox" />
+      <div className="rounded-2xl h-[3px] w-1/2 bg-white duration-500 peer-checked:rotate-[225deg] origin-right peer-checked:-translate-x-[12px] peer-checked:-translate-y-[1px]" />
+      <div className="rounded-2xl h-[3px] w-full bg-white duration-500 peer-checked:-rotate-45" />
+      <div className="rounded-2xl h-[3px] w-1/2 bg-white duration-500 place-self-end peer-checked:rotate-[225deg] origin-left peer-checked:translate-x-[12px] peer-checked:translate-y-[1px]" />
+    </label>)}
+     <Sidenav  />
       <div className="flex-1 flex flex-col overflow-y-auto ">
         <Topnav navOpenHandler={navOpenHandler} />
         <Header data={header} />
@@ -65,11 +74,11 @@ const Home = () => {
 
         <Cards data={cards} title={category} />
         
-        {isMobile && (
+        {/* {isMobile && (
           <nav className="md:hidden h-screen/4 fixed top-0 left-0 right-0 bg-[#1F1F1F] p-4">
             {<Sidenav />}
           </nav>
-        )}
+        )} */}
       </div>
     </div>
   ) : <Loading />

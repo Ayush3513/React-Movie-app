@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Sidenav = ({ isMobile  }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Sidenav = ({Mobile}) => {
+  const [isMobile, setisMobile] = useState(Mobile);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [isMobile]);
+useEffect(()=>{
+  setisMobile(window.innerWidth <= 768? true : false)
+},[isMobile])
 
-  const toggleNav = () => setIsOpen(!isOpen);
+  const NavLink = ({ to, icon, text }) => (
+    <Link 
+      to={to} 
+      className='p-2 md:p-4 hover:bg-[rgb(101,86,205)] hover:text-white text-zinc-400 duration-300 rounded-lg text-sm md:text-base font-semibold flex items-center'
+      // onClick={() => isMobile && setisMobile(false)}
+    >
+      <i className={`${icon} text-zinc-400 mr-3`}></i>
+      {text}
+    </Link>
+  );
+  // const toggleNav = () => setismobille(!ismobille);
 
   const NavContent = () => (
     <>
@@ -36,46 +46,15 @@ const Sidenav = ({ isMobile  }) => {
     </>
   );
 
-  const NavLink = ({ to, icon, text }) => (
-    <Link 
-      to={to} 
-      className='p-2 md:p-4 hover:bg-[#6556CD] hover:text-white text-zinc-400 duration-300 rounded-lg text-sm md:text-base font-semibold flex items-center'
-      onClick={() => isMobile && setIsOpen(false)}
-    >
-      <i className={`${icon} text-zinc-400 mr-3`}></i>
-      {text}
-    </Link>
-  );
+  
 
   return (
     <>
-      {isMobile ? (
-        <>
-          <div className="fixed top-0 left-0 bg-[#1F1F1F] z-50">
-            <button 
-              onClick={toggleNav}
-              className="w-full p-4 text-white bg-[#6556CD] flex items-center justify-center"
-            >
-              <i className={`ri-menu-line mr-2`}></i> Menu
-            </button>
-          </div>
-          {isOpen && (
-            <div className="fixed inset-0 bg-[#1F1F1F] z-[999] p-4 overflow-y-auto">
-              <button 
-                onClick={toggleNav}
-                className="absolute top-4 right-4 text-white text-2xl"
-              >
-                <i className="ri-close-line"></i>
-              </button>
-              <NavContent />
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="w-64 h-full border-r border-zinc-700 p-6 bg-black[#1F1F1F] overflow-y-auto">
+      
+        <div className={`${isMobile ? " z-[100] p-20 absolute h-screnn border-r border-zinc-700 bg-black overflow-y-auto" : "w-64 relative h-full border-r border-zinc-700 p-6 bg-black[#1F1F1F] overflow-y-auto"}`}>
           <NavContent />
         </div>
-      )}
+
     </>
   );
 };

@@ -2,7 +2,7 @@ import axios from '../../Utils/Axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { debounce } from 'lodash';
-import Checkbox from './Checkbox';
+// import Checkbox from './Checkbox';
 
 const Topnav = ({navOpenHandler}) => {
   const [query, setQuery] = useState("");
@@ -50,7 +50,7 @@ const Topnav = ({navOpenHandler}) => {
         )}
       </div>
      <button className='w-10 h-10' onClick={navOpenHandler}>
-     <Checkbox />
+     {/* <Checkbox /> */}
      </button>
       
       {searches.length > 0 && (

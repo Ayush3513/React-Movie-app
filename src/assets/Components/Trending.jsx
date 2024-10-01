@@ -63,7 +63,7 @@ const Trending = () => {
                             </button>
                             <h1 className="text-xl md:text-2xl font-bold">Trending</h1>
                         </div>
-                        <div className="w-full lg:w-auto flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-full  flex flex-col sm:flex-row items-center gap-4">
                             <Topnav />
                             <div className="flex items-center gap-4">
                                 <Dropdown title1={"Category"} func={setCategory} options={["tv", "movie", "all"]} />
