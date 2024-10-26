@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Loading from './assets/Components/Loading';
+import AllWorks from './assets/Components/AllWorks';
+import Contact from './assets/Components/Contact';
+import AboutUs from './assets/Components/AboutUs';
 
 // Lazy load components
 const Home = lazy(() => import('./assets/Components/Home'));
@@ -22,6 +25,9 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/trending' element={<Trending />} />
+          <Route path='/contact' element={<Contact/>} />
+          <Route path='/AboutUs' element={<AboutUs/>} />
+          <Route path="/person/:id/all-works" element={<AllWorks />} />
           <Route path='/popular' element={<Popular />} />
           <Route path='/movie' element={<Movies />} />
           <Route path='/movie/details/:id' element={<MovieDetails />}>

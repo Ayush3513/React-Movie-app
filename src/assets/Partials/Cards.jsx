@@ -1,26 +1,43 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-const Cards = ({data,title}) => {
-
+const Cards = ({ data, title, limit }) => {
+  const displayData = limit ? data.slice(0, limit) : data;
 
   return (
-    <div className=' w-full p-8 overflow-x-auto   ' >
-     
-        <div className="flex gap-7 overflow-x-auto overflow-y-hidden ">
-        {data.map((data,i)=>{
-          return <Link to={`/${ data.media_type || data.media_type || title }/details/${data.id}`} key={i} className="h-[40vh] mb-10 bg-[#080611] flex-shrink-0 w-[10vw]">
-          <img className='h-[55%] shadow-[10px_20px_40px_5px_rgb(0,0,0)] w-full object-cover' src={data.backdrop_path ? `https://image.tmdb.org/t/p/original${data.backdrop_path}` : "https://cdn.vectorstock.com/i/500p/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"} alt="" />
-          <div className="mt-2 p-3">
-          <h1 className='text-xl font-semibold '>{data.original_name || data.name || data.original_title || data.title}</h1>
-          <p className=' text-sm mt-1 opacity-[.7] '>{data.overview.slice(0,20)}...<Link className='text-zinc-500'>more</Link></p>
+    <div className='w-full p-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6'>
+      {displayData.map((item, index) => (
+        <Link 
+          to={`/${item.media_type || title}/details/${item.id}`} 
+          key={index} 
+          className="bg-[#080611] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
+        >
+          <div className={`relative ${title === 'person' ? 'pb-[150%]' : 'pb-[56.25%]'}`}>
+            <img 
+              className='absolute top-0 left-0 w-full h-full object-cover'
+              src={
+                item.poster_path || item.profile_path
+                  ? `https://image.tmdb.org/t/p/w500${item.poster_path || item.profile_path}`
+                  : "https://via.placeholder.com/500x750?text=No+Image"
+              }
+              alt={item.title || item.name}
+              loading="lazy"
+            />
+          </div>
+          <div className="p-4 flex-grow flex flex-col justify-between">
+            <h2 className='text-sm sm:text-base font-semibold mb-2 line-clamp-2'>
+              {item.title || item.name}
+            </h2>
+            {title !== 'person' && (
+              <p className='text-xs sm:text-sm mt-1 opacity-[.7] line-clamp-3'>
+                {item.release_date || item.first_air_date}
+              </p>
+            )}
           </div>
         </Link>
-        })}
-        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Cards
+export default Cards;

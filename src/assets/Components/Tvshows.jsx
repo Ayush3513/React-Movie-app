@@ -1,38 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import Topnav from './Topnav';
-import Dropdown from '../Partials/Dropdown';
 import { useNavigate } from 'react-router-dom';
 import Loading from './Loading';
 import axios from '../../Utils/Axios';
 import Tcards from './Tcards';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const Tvshows = () => {
-    document.title = "TV Shows"
+const TVShows = () => {
+    document.title = "TV Shows";
     const [cards, setCards] = useState([]);
-    const [page, setPage] = useState(1); // For pagination
-    const [hasMore, setHasMore] = useState(false);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const navigate = useNavigate();
 
     const getCard = async () => {
         try {
+            setIsLoading(true);
+            setError(null);
             const { data } = await axios.get(`tv/top_rated`, {
-                params: { page } // Sending the page number to fetch more data
+                params: { page }
             });
-            setCards((prevCards) => [...prevCards, ...data.results]); // Append new results
-            if (data.results.length === 0) {
-                setHasMore(false); // No more data to fetch
-            }
+            setCards((prevCards) => [...prevCards, ...data.results]);
+            setHasMore(data.results.length > 0);
         } catch (error) {
             console.log("Error: ", error);
+            setError("Failed to fetch data. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        setCards([]); // Reset cards when category or duration changes
-        setPage(1); // Reset page to 1
-        setHasMore(true); // Reset hasMore to true
         getCard();
     }, []);
 
@@ -41,32 +42,49 @@ const Tvshows = () => {
         getCard();
     };
 
-    return cards.length > 0 ? (
-        <div className="h-screen w-full overflow-auto flex flex-col">
-            <div className="h-[10vh] w-full z-[10] p-10 flex items-center fixed bg-[#1F1E24] justify-between">
-                <div className="flex items-center">
-                    <i onClick={() => navigate(-1)} className="ri-arrow-left-line text-2xl"></i>
-                    <h1 className="text-2xl ml-3 w-[7vw] leading-none">TV Shows</h1>
-                </div>
-                <Topnav />
-                <div className="flex w-[15vw] items-center justify-between">
+    return (
+        <div className="min-h-screen w-full bg-[#1F1E24] flex flex-col">
+            <div className="sticky top-0 z-10 bg-[#1F1E24] shadow-md">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div className="flex items-center">
+                            <button 
+                                onClick={() => navigate(-1)} 
+                                aria-label="Go back"
+                                className="text-2xl mr-3 hover:text-gray-300 transition-colors"
+                            >
+                                <i className="ri-arrow-left-line"></i>
+                            </button>
+                            <h1 className="text-xl w-80 sm:text-2xl font-bold">TV Shows</h1>
+                        </div>
+                        <Topnav />
+                    </div>
                 </div>
             </div>
+
+            {error && (
+                <div className="text-red-500 p-4 text-center">{error}</div>
+            )}
 
             <InfiniteScroll
                 dataLength={cards.length}
                 next={fetchMoreData}
                 hasMore={hasMore}
-                className='pt-20 pl-5 w-[100vw] h-screen  '
+                loader={<Loading />}
+                className='flex-grow bg-black w-full px-4 sm:px-6 lg:px-8 pt-6'
             >
-               
-                    <Tcards data={cards} title={"tv"} />
-                
+                <Tcards data={cards} title="tv" />
             </InfiniteScroll>
+
+            {isLoading && cards.length === 0 && <Loading />}
+
+            {!isLoading && cards.length === 0 && !error && (
+                <div className="text-center py-10 text-gray-500">
+                    No TV shows found.
+                </div>
+            )}
         </div>
-    ) : (
-        <Loading/>
     );
 };
 
-export default Tvshows;
+export default TVShows;
