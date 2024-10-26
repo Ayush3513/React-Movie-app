@@ -26,7 +26,9 @@ const Home = () => {
   }
 
   const navOpenHandler = ()=>{
+
     setIsMobile(window.innerWidth <= 768 ? true : false)
+
   }
 
   useEffect(() => {
